@@ -52,6 +52,10 @@ def send_album(photos, caption=None):
             files=files,
             timeout=60,
         )
+        if not response.ok:
+            print(f"❌ Telegram API error {response.status_code}:")
+            print(f"   Response: {response.text}")
+            print(f"   CHAT_ID used: {CHAT_ID}")
         response.raise_for_status()
         return response.json()
     finally:
